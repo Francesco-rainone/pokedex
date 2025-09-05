@@ -17,8 +17,8 @@ const PokemonCard = ({ details }) => {
           </span>
           <div className="pokemon-img-container">
             <img
-              src={details.sprites.front_default}
-              alt={details.name}
+              src={details.sprites.other['official-artwork'].front_default || details.sprites.front_default}
+                alt={details.name}
               className="pokemon-image"
             />
           </div>

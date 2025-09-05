@@ -19,88 +19,89 @@ const PokemonDetails = () => {
     fetchPokemonDetails();
   }, [id]);
 
-  if (!pokemon)
+  if (!pokemon) {
     return (
       <div className="loading">
         <i className="fas fa-spinner"></i> Caricamento...
       </div>
     );
+  }
 
   const FirstType = pokemon.types[0].type.name;
 
   return (
     <article className="single-card-container">
-      <div className="pokemon-card">
-        <div className={`single-card-top FirstType-${FirstType}`}>
-          <Link to="/" className="back-button">
-            <i className="fas fa-angle-left"></i>
-          </Link>
+      {/* The main, single card container with a background color based on the type */}
+      <div className={`pokemon-card FirstType-${FirstType}`}>
+        <div className="details-grid-container parent">
+          {/* DIV 1: Left Column (Visuals) */}
+          <div className="div1">
+            <Link to="/" className="back-button">
+              <i className="fas fa-angle-left"></i>
+            </Link>
+            <span className="single-pokemon-id">
+              #{String(pokemon.id).padStart(3, '0')}
+            </span>
 
-          <span className="single-pokemon-id">
-            #{String(pokemon.id).padStart(3, '0')}
-          </span>
-          <div className="pokemon-single-img-container">
-            <img
-              src={pokemon.sprites.front_default}
-              alt={pokemon.name}
-              style={{ padding: 0 }}
-            />
-          </div>
-          <h2 className="pokemon-single-name">{pokemon.name}</h2>
-
-          <div className="single-pokemon-types">
-            {pokemon.types.map((pokemonType) => (
-              <span
-                key={pokemonType.type.name}
-                className={`single-pokemon-type type-${pokemonType.type.name}`}
-              >
-                {pokemonType.type.name}
-              </span>
-            ))}
-          </div>
-
-          <div className="pokemon-info">
-            <div className="info-grid">
-              <div className="info-card">
-                <div className="characteristics">
-                  <div className="characteristic">
-                    <span className="characteristic-label">Altezza</span>
-                    <span className="characteristic-value">
-                      {pokemon.height / 10}m
-                    </span>
-                  </div>
-                  <div className="characteristic">
-                    <span className="characteristic-label">Peso</span>
-                    <span className="characteristic-value">
-                      {pokemon.weight / 10}kg
-                    </span>
-                  </div>
+            <div className="pokemon-single-img-container">
+              <img
+                src={pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default}
+                alt={pokemon.name}
+              />
+            </div>
+            <h2 className="pokemon-single-name">{pokemon.name}</h2>
+            <div className="single-pokemon-types">
+              {pokemon.types.map((pokemonType) => (
+                <span
+                  key={pokemonType.type.name}
+                  className={`single-pokemon-type type-${pokemonType.type.name}`}
+                >
+                  {pokemonType.type.name}
+                </span>
+              ))}
+            </div>
+            <section className="info-section">
+              <div className="characteristics">
+                <div className="characteristic">
+                  <span className="characteristic-label">Height  </span>
+                  <span className="characteristic-value">{pokemon.height / 10}m</span>
+                </div>
+                <div className="characteristic">
+                  <span className="characteristic-label">Weight  </span>
+                  <span className="characteristic-value">{pokemon.weight / 10}kg</span>
                 </div>
               </div>
-            </div>
+            </section>
+          </div>
 
-            <div className="info-card">
-              <h3>Abilità</h3>
+          {/* DIV 2: Right Column (Data) */}
+          <div className="div2">
+            
+            <section className="info-section">
+              <h3>Abilities</h3>
               <div className="abilities">
                 {pokemon.abilities.map((ability) => (
                   <div key={ability.ability.name} className="ability-item">
                     <span className="ability-name">{ability.ability.name}</span>
-                    {ability.is_hidden && (
-                      <span className="hidden-badge">Nascosta</span>
-                    )}
+                    {ability.is_hidden && <span className="hidden-badge">Hidden</span>}
                   </div>
                 ))}
               </div>
-            </div>
-
-            <section className="pokemon-stats">
-              <h3>Statistiche</h3>
+            </section>
+            
+            <section className="info-section pokemon-stats">
+              <h3>Base Stats</h3>
               <div className="stats">
                 {pokemon.stats.map((stat) => (
                   <div key={stat.stat.name} className="stat-bar">
-                    <span className="stat-name">{stat.stat.name}:</span>
+                    <span className="stat-name">{stat.stat.name}</span>
                     <div className="stat-bar-container">
-                      <div className="stat-bar-fill">{stat.base_stat}</div>
+                      <div
+                        className="stat-bar-fill"
+                        style={{ width: `${(stat.base_stat / 255) * 100}%` }}
+                      >
+                         <span className="stat-value">{stat.base_stat}</span>
+                      </div>
                     </div>
                   </div>
                 ))}
