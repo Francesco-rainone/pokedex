@@ -31,11 +31,9 @@ const PokemonDetails = () => {
 
   return (
     <article className="single-card-container">
-      {/* The main, single card container with a background color based on the type */}
       <div className={`pokemon-card FirstType-${FirstType}`}>
         <div className="details-grid-container parent">
-          {/* DIV 1: Left Column (Visuals) */}
-          <div className="div1">
+          <div className="left-column">
             <Link to="/" className="back-button">
               <i className="fas fa-angle-left"></i>
             </Link>
@@ -74,8 +72,7 @@ const PokemonDetails = () => {
             </section>
           </div>
 
-          {/* DIV 2: Right Column (Data) */}
-          <div className="div2">
+          <div className="right-column">
             
             <section className="info-section">
               <h3>Abilities</h3>

@@ -227,7 +227,7 @@
         gap: 24px;
     }
     
-    .div1 {
+    .left-column {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -235,7 +235,7 @@
         text-align: center;
     }
     
-    .div2 {
+    .right-column {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -255,8 +255,8 @@
         margin-bottom: 16px;
         font-size: 1.2rem;
     }
-    
-    .div1 .info-section {
+
+    .left-column .info-section {
         background: none;
         padding: 0;
         margin-top: 24px;
@@ -392,15 +392,15 @@
         gap: 64px; 
       }
     
-      .div2 {
+      .right-column {
         gap: 40px;
       }
       
       .info-section {
         padding: 24px;
       }
-    
-      .div1 .info-section {
+
+      .left-column .info-section {
         margin-top: 32px;
       }
     
